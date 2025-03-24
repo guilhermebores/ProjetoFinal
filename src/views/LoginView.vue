@@ -1,23 +1,57 @@
 <template>
-    <div>
+    <div v-if="!auth.isAuthenticated">
         <h2>Login</h2>
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="enviar">
             <div>
-                <label for="email">Email</label>
+                <label for="email">Email:</label>
                 <input type="email" id="email" v-model="email" required />
             </div>
             <div>
-                <label for="password">Senha</label>
-                <input type="password" id="password" v-model="password" required />
+                <label for="password">Senha:</label>
+                <input type="password" id="password" v-model="senha" required />
             </div>
             <button type="submit">Login</button>
         </form>
     </div>
+
+     <div v-else>
+        <div class="content">
+            <p>Aqui estão seus dados:</p>
+            <h1>Bem-vindo, {{ auth.user.name }} {{auth.user.email}}</h1>
+        </div>    
+        <div>
+
+        <button @click="auth.logout">Sair</button>
+    </div>
+
+    </div>
+
+
 </template>
 
-<script>
-import HomeView from './HomeView.vue';
+<script setup>
+import { login } from '@/service/service.js';
+import { useAuthStore } from '@/stores/auth.js';
+import { ref } from 'vue';
 
+const email = ref('')
+const senha = ref('')
+
+const auth = useAuthStore()
+
+async function enviar() {
+    const result = await login({ 
+        email: email.value, 
+        password: senha.value
+    })
+
+    if (result.status >= 200 && result.status < 300) {
+        alert('Login sucessso')
+        auth.saveUser(result.data)
+    } else {
+        alert('Login falhou')
+    }
+}
 
 </script>
 

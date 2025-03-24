@@ -5,7 +5,7 @@ import HeaderComponent from './components/HeaderComponent.vue';
 </script>
 
 <template>
-
+        <HeaderComponent />
 
 <main>
   <RouterView/>
@@ -16,4 +16,6 @@ import HeaderComponent from './components/HeaderComponent.vue';
 </footer>
 </template>
 
-<style scoped></style>
+<style>
+
+</style>
