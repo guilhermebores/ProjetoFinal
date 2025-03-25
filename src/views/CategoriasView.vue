@@ -20,10 +20,14 @@ export default {
     data() {
         return {
             categorias: [
-                { id: 1, nome: "Tecnologia", descricao: "Últimas novidades em tecnologia", imagem: "https://via.placeholder.com/150" },
-                { id: 2, nome: "Moda", descricao: "Tendências de moda para todas as estações", imagem: "https://via.placeholder.com/150" },
-                { id: 3, nome: "Saúde", descricao: "Cuidados com o corpo e mente", imagem: "https://via.placeholder.com/150" },
-                { id: 4, nome: "Culinária", descricao: "Receitas e dicas gastronômicas", imagem: "https://via.placeholder.com/150" }
+                { id: 1, nome: "Computers", descricao: "Últimas novidades em Computadores", imagem: "" },
+                { id: 2, nome: "Shoes", descricao: "Tendências de moda para Sapatos", imagem: "" },
+                { id: 3, nome: "Skate", descricao: "Mundo do Esporte", imagem: "" },
+                { id: 4, nome: "Carros", descricao: "Melhores modelos e marcas", imagem: "" },
+                { id: 5, nome: "Smartfone", descricao: "Melhores Preços", imagem: "" },
+                { id: 4, nome: "Latops", descricao: "Últimas novidades em Latops", imagem: "" },
+                { id: 4, nome: "Cars", descricao: "Melhores Marcas", imagem: "" },
+                { id: 4, nome: "Motorcycles", descricao: "Melhores modelos, melhores preços", imagem: "" },
             ]
         };
     },

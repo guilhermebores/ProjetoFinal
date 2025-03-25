@@ -5,17 +5,20 @@ import HeaderComponent from './components/HeaderComponent.vue';
 </script>
 
 <template>
-        <HeaderComponent />
+  <HeaderComponent />
 
-<main>
-  <RouterView/>
-</main>
+  <main>
+    <RouterView />
+  </main>
 
-<footer>
+  <footer>
 
-</footer>
+  </footer>
 </template>
 
 <style>
-
+body {
+  padding: 0;
+  margin: 0;
+}
 </style>
