@@ -55,7 +55,7 @@ async function enviar() {
             password: password.value
         });
 
-        if (result.status >= 200 && result.status < 300) {
+        if (result.status >= 200 && result.status < 300 || result.status == undefined) {
             alert('Registro bem-sucedido');
             auth.saveUser(result.data);
         } else {

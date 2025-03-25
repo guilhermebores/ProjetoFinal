@@ -47,6 +47,6 @@ export async function register(payload) {
         "Content-Type": "application/json",
       },
     });
-    return response;
+      return response;
   } catch (error) {}
 }
