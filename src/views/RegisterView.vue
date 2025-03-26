@@ -26,7 +26,7 @@
 
     <div v-else class="content-container">
         <h1 class="content-title">Aqui estão seus dados:</h1>
-        <h2 class="welcome-message">Bem-vindo, {{ auth.user.name }} ({{ auth.user.email }}-)</h2>
+        <h2 class="welcome-message">Bem-vindo, {{ auth.user.name }} ({{ auth.user.email }})</h2>
         <button @click="auth.logout" class="logout-btn">Sair</button>
     </div>
 </template>
@@ -35,19 +35,22 @@
 import { register } from '@/service/service.js';
 import { useAuthStore } from '@/stores/auth.js';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const name = ref('');
 const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const isLoading = ref(false);
-
 const auth = useAuthStore();
+const router = useRouter();
 
 console.log(auth.user.name)
 
 async function enviar() {
     isLoading.value = true;
+
+
 
         const result = await register({
             name: name.value,
@@ -61,11 +64,14 @@ async function enviar() {
         } else {
             alert('Falha no registro');
         }
-     
+    
     if (password.value !== confirmPassword.value) {
         alert('As senhas não coincidem');
+        isLoading.value = false;
         return;
     }
+
+    isLoading.value = false;
 
 }
 </script>

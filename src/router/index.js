@@ -28,6 +28,6 @@ const router = createRouter({
       component: RegisterView,
     },
   ],
-})
+});
 
-export default router
+export default router;

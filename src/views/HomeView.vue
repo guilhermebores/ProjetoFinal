@@ -1,5 +1,5 @@
 <template>
-   
+
 
     <ul v-for="cat in categoria" :key="cat.id">
         <li> {{ cat.name }} </li>

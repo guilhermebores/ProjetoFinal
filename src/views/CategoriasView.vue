@@ -17,24 +17,11 @@
 <script>
 export default {
     name: "CategoriasView",
-    data() {
-        return {
-            categorias: [
-                { id: 1, nome: "Computers", descricao: "Últimas novidades em Computadores", imagem: "" },
-                { id: 2, nome: "Shoes", descricao: "Tendências de moda para Sapatos", imagem: "" },
-                { id: 3, nome: "Skate", descricao: "Mundo do Esporte", imagem: "" },
-                { id: 4, nome: "Carros", descricao: "Melhores modelos e marcas", imagem: "" },
-                { id: 5, nome: "Smartfone", descricao: "Melhores Preços", imagem: "" },
-                { id: 4, nome: "Latops", descricao: "Últimas novidades em Latops", imagem: "" },
-                { id: 4, nome: "Cars", descricao: "Melhores Marcas", imagem: "" },
-                { id: 4, nome: "Motorcycles", descricao: "Melhores modelos, melhores preços", imagem: "" },
-            ]
-        };
-    },
+
     methods: {
         selecionarCategoria(id) {
             // Aqui pode-se adicionar lógica para redirecionar ou mostrar mais informações sobre a categoria
-            console.log("Categoria selecionada:", id);
+            console.log("Categoria selecionada:", id );
         }
     }
 };

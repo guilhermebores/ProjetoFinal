@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQyOTM2ODE1fQ.CumgLh3wpHJnTufKCXCtbBjotng-xpa8f9isHHOXjn8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzMDI0MTA5fQ.kxxFaXdmxzklHB-doyL_p26QGPUAT4HUykesbhfqzb8";
 export async function getCategorias() {
   try {
     const resultado = await api.get("/categories/", {

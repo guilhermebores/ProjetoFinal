@@ -15,15 +15,16 @@ export const useAuthStore = defineStore(
     }
 
     function saveUser(result) {
-      user.value = result.user;
+      console.log(result);
+      user.value = result;
       isAuthenticated.value = true;
       token.value = result.token;
     }
 
     return { token, user, isAuthenticated, logout, saveUser };
-    },
-  
+  },
+
   { persist: true }
-)
+);
 
 export default useAuthStore;
