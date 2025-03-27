@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzMDI0MTA5fQ.kxxFaXdmxzklHB-doyL_p26QGPUAT4HUykesbhfqzb8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzMTEwNTcxfQ.E0qkD6tntBJD7JUDyqBWRKgZWq5smGcQYVM9s8EdlVQ";
 export async function getCategorias() {
   try {
     const resultado = await api.get("/categories/", {
@@ -48,5 +48,20 @@ export async function register(payload) {
       },
     });
       return response;
+  } catch (error) {}
+}
+
+
+
+export async function categories() {
+  try {
+    const response = await api.post("/categories/user/6", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
   } catch (error) {}
 }

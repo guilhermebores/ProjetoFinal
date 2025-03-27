@@ -2,6 +2,7 @@
     <header>
         <nav>
             <ul>
+                <li><img src="/src/assets/img/pngwing.com (5).png" alt=""></li>
                 <li><router-link to="/">Home</router-link></li>
                 <li><router-link to="/categoria">Categoria</router-link></li>
                 <li><router-link to="/contact">Contact</router-link></li>
@@ -22,6 +23,10 @@
 </script>
 
 <style scoped>
+img{
+    height: 50px;
+}
+
 header {
     background-color: #333;
     color: white;

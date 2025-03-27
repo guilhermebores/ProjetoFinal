@@ -80,6 +80,7 @@ async function enviar() {
 /* Geral */
 .auth-container,
 .content-container {
+    height: 64vh;
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;

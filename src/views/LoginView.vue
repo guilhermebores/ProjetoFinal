@@ -20,7 +20,7 @@
 
     <div v-else class="content-container">
         <h1 class="content-title">Aqui estão seus dados:</h1>
-        <h2 class="welcome-message">Bem-vindo, {{ auth.user.name }} ({{ auth.user.email }})</h2>
+        <h2 class="welcome-message">Bem-vindo, {{auth.user.user.name}} ({{ auth.user.user.email }})</h2>
         <button @click="auth.logout" class="logout-btn">Sair</button>
     </div>
 </template>
@@ -36,6 +36,8 @@ const emailError = ref('');
 const passwordError = ref('');
 const isLoading = ref(false);
 const auth = useAuthStore();
+
+console.log(auth.user)
 
 async function enviar() {
     emailError.value = '';
@@ -73,6 +75,7 @@ async function enviar() {
 /* Geral */
 .auth-container,
 .content-container {
+    height: 64vh;
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
