@@ -9,18 +9,17 @@ import HeaderComponent from './components/HeaderComponent.vue';
   <HeaderComponent />
   <main>
     <RouterView />
-    <FooterComponent />
-
   </main>
-
-  <footer>
-
-  </footer>
+  <FooterComponent />
 </template>
 
 <style>
 body {
   padding: 0;
   margin: 0;
+}
+
+main {
+  min-height: 70vh;
 }
 </style>

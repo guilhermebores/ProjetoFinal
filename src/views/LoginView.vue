@@ -1,27 +1,29 @@
 <template>
-    <div v-if="!auth.isAuthenticated" class="auth-container">
-        <h2 class="auth-title">Login</h2>
-        <form @submit.prevent="enviar" class="auth-form">
-            <div class="form-group">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" v-model="email" required class="form-input" />
-                <span v-if="emailError" class="error-message">{{ emailError }}</span>
-            </div>
-            <div class="form-group">
-                <label for="password" class="form-label">Senha:</label>
-                <input type="password" id="password" v-model="senha" required class="form-input" />
-                <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
-            </div>
-            <button type="submit" :disabled="isLoading" class="submit-btn">
-                {{ isLoading ? 'Carregando...' : 'Login' }}
-            </button>
-        </form>
-    </div>
+    <div>
+        <div v-if="!auth.isAuthenticated" class="auth-container">
+            <h2 class="auth-title">Login</h2>
+            <form @submit.prevent="enviar" class="auth-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" v-model="email" required class="form-input" />
+                    <span v-if="emailError" class="error-message">{{ emailError }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Senha:</label>
+                    <input type="password" id="password" v-model="senha" required class="form-input" />
+                    <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
+                </div>
+                <button type="submit" :disabled="isLoading" class="submit-btn">
+                    {{ isLoading ? 'Carregando...' : 'Login' }}
+                </button>
+            </form>
+        </div>
 
-    <div v-else class="content-container">
-        <h1 class="content-title">Aqui estão seus dados:</h1>
-        <h2 class="welcome-message">Bem-vindo, {{auth.user.user.name}} ({{ auth.user.user.email }})</h2>
-        <button @click="auth.logout" class="logout-btn">Sair</button>
+        <div v-else class="content-container">
+            <h1 class="content-title">Aqui estão seus dados:</h1>
+            <h2 class="welcome-message">Bem-vindo, {{ auth.user.name }} {{ auth.user.email }}</h2>
+            <button @click="auth.logout" class="logout-btn">Sair</button>
+        </div>
     </div>
 </template>
 

@@ -21,13 +21,11 @@
 <script setup>
 import { getCategorias } from "@/service/service";
 import { onMounted, ref } from "vue";
-
 import { useAuthStore } from "@/stores/auth";
 
+
+
 const auth = useAuthStore()
-
-
-
 const categoria = ref([])
 
 const props = defineProps({
