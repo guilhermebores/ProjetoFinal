@@ -5,7 +5,6 @@
                 <li><img src="/src/assets/img/pngwing.com (5).png" alt=""></li>
                 <li><router-link to="/">Home</router-link></li>
                 <li><router-link to="/categoria">Categoria</router-link></li>
-                <li><router-link to="/contact">Contact</router-link></li>
                 <li v-if="isAuthenticated">
                     <button @click="logout">Logout</button>
                 </li>

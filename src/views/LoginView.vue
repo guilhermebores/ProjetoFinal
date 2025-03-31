@@ -20,8 +20,7 @@
         </div>
 
         <div v-else class="content-container">
-            <h1 class="content-title">Aqui estão seus dados:</h1>
-            <h2 class="welcome-message">Bem-vindo, {{ auth.user.name }} {{ auth.user.email }}</h2>
+            <h2 class="welcome-message">Bem-vindo {{ auth.user.name }} {{ auth.user.email }}</h2>
             <button @click="auth.logout" class="logout-btn">Sair</button>
         </div>
     </div>
@@ -39,7 +38,6 @@ const passwordError = ref('');
 const isLoading = ref(false);
 const auth = useAuthStore();
 
-console.log(auth.user)
 
 async function enviar() {
     emailError.value = '';
@@ -59,7 +57,7 @@ async function enviar() {
             password: senha.value,
         });
 
-        if (result.status >= 200 && result.status < 300) {
+        if (result.status == 200 ) {
             alert('Login bem-sucedido');
             auth.saveUser(result.data);
         } else {

@@ -3,11 +3,13 @@
         <h1>Categorias</h1>
         <div class="categorias-list">
             <div v-for="categoria in categorias" :key="categoria.id" class="categoria-card">
-                <img :src="categoria.imagem" alt="Imagem da categoria" class="categoria-image" />
+                <img :src="getImg(categoria.image_path)" alt="Imagem da categoria" class="categoria-image" />
                 <div class="categoria-info">
-                    <h2>{{ categoria.nome }}</h2>
-                    <p>{{ categoria.descricao }}</p>
-                    <button @click="selecionarCategoria(categoria.id)">Ver mais</button>
+                    <h2>{{ categoria.name }}</h2>
+                    <p>{{ categoria.description }}</p>
+                    <router-link :to="{ name: 'GamesView', params: { id: categoria.id } }">
+                        <button>🎮</button>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -26,7 +28,7 @@ import { useAuthStore } from "@/stores/auth";
 
 
 const auth = useAuthStore()
-const categoria = ref([])
+const categorias = ref([])
 
 const props = defineProps({
     name: String,
@@ -36,12 +38,20 @@ const props = defineProps({
 
 async function pegandoCategoria() {
     const resultado = await getCategorias()
-    categoria.value = resultado
+    categorias.value = resultado
 }
 
 onMounted(() => {
     pegandoCategoria()
 })
+
+function getImg(imagePath) {
+    const baseUrl = "http://35.196.79.227:8000";
+    console.log(imagePath)
+    return `${baseUrl}${imagePath}`;
+}
+
+
 </script>
 
 <style scoped>
@@ -77,8 +87,8 @@ h1 {
 }
 
 .categoria-image {
-    width: 100%;
-    height: auto;
+    width: 135px;
+    height: 125px;
     border-radius: 8px;
     margin-bottom: 15px;
 }
@@ -102,6 +112,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 20px;
 }
 
 button:hover {
@@ -194,4 +205,3 @@ li:hover {
     }
 }
 </style>
-

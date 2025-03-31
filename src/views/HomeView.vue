@@ -36,21 +36,32 @@
                 GamesKing – Aqui, o jogo nunca acaba!
             </p>
         </div>
+        <div class="desconto-container" v-if="produtosComDesconto.length">
+            <h2>🔥 Ofertas Especiais 🔥</h2>
+            <div class="produtos-desconto">
+                <div v-for="produto in produtosComDesconto" :key="produto.id" class="produto-card">
+                    <img :src="produto.image" :alt="produto.nome" class="produto-imagem">
+                    <h3>{{ produto.nome }}</h3>
+                    <p class="preco-original">De: R$ {{ produto.preco_original.toFixed(2) }}</p>
+                    <p class="preco-desconto">Por: R$ {{ produto.preco_desconto.toFixed(2) }}</p>
+                    <button @click="adicionarAoCarrinho(produto)">Comprar</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script setup>
 
-import { getCategorias } from "@/service/service";
+import { getCategorias, getProdutosComDesconto } from "@/service/service";
 import { onMounted, ref } from "vue";
 
 import { useAuthStore } from "@/stores/auth";
 
 const auth = useAuthStore()
-
-
-
 const categoria = ref([])
+const produtosComDesconto = ref([]);
 
 const props = defineProps({
     name: String,
@@ -61,6 +72,16 @@ const props = defineProps({
 async function pegandoCategoria() {
     const resultado = await getCategorias()
     categoria.value = resultado
+}
+
+async function carregarProdutosComDesconto() {
+    try {
+        const resultado = await getProdutosComDesconto();
+        produtosComDesconto.value = resultado;
+        console.log("Produtos com desconto:", resultado);
+    } catch (error) {
+        console.error("Erro ao carregar produtos com desconto:", error);
+    }
 }
 
 onMounted(() => {
@@ -175,4 +196,74 @@ li:hover {
         font-size: 1rem;
     }
 }
+
+.desconto-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.produtos-desconto {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.produto-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.produto-card:hover {
+    transform: translateY(-5px);
+}
+
+.produto-imagem {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.preco-original {
+    text-decoration: line-through;
+    color: red;
+    font-size: 0.9rem;
+}
+
+.preco-desconto {
+    font-size: 1.2rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 </style>

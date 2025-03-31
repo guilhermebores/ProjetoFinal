@@ -18,15 +18,14 @@
                 <label for="confirmPassword" class="form-label">Confirmar Senha:</label>
                 <input type="password" id="confirmPassword" v-model="confirmPassword" required class="form-input" />
             </div>
-            <button type="submit" :disabled="isLoading" class="submit-btn">
-                {{ isLoading ? 'Registrando...' : 'Registrar' }}
+            <button type="submit"  class="submit-btn">
+        enviar
             </button>
         </form>
     </div>
 
     <div v-else class="content-container">
-        <h1 class="content-title">Aqui estão seus dados:</h1>
-        <h2 class="welcome-message">Bem-vindo, {{ auth.user.name }} ({{ auth.user.email }})</h2>
+        <h2 class="welcome-message">Bem-vindo {{ auth.user.name }} {{ auth.user.email }}</h2>
         <button @click="auth.logout" class="logout-btn">Sair</button>
     </div>
 </template>
@@ -58,7 +57,7 @@ async function enviar() {
             password: password.value
         });
 
-        if (result.status >= 200 && result.status < 300 || result.status == undefined) {
+        if (result.status == 201 ) {
             alert('Registro bem-sucedido');
             auth.saveUser(result.data);
         } else {
