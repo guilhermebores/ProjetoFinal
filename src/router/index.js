@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import CategoriasView from '@/views/CategoriasView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import GamesView from '@/views/GamesView.vue'
+import CarrinhoView from '@/views/CarrinhoView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,12 @@ const router = createRouter({
       name: 'GamesView',
       component: GamesView,
       props: true,
+    },
+    {
+      path: '/', component: GamesView
+    },
+    {
+      path: '/carrinho', component: CarrinhoView
     },
   ],
 });

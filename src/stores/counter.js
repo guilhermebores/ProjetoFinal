@@ -15,5 +15,19 @@ export const useCounterStore = defineStore('counter', () => {
     }
     
 
-   return { contador, incrementar, decrementar }
-}, {persist: true})
+    return { contador, incrementar, decrementar }
+}, { persist: true })
+
+export const useCartStore = defineStore("cart", () => {
+    const cart = ref([]);
+
+    const addToCart = (product) => {
+    cart.value.push(product);
+    };
+
+    const removeFromCart = (productId) => {
+    cart.value = cart.value.filter((item) => item.id !== productId);
+    };
+
+    return { cart, addToCart, removeFromCart };
+});

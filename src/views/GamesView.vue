@@ -9,7 +9,7 @@
                     <h3>{{ game.name }}</h3>
                     <p>{{ game.description }}</p>
                     <p>{{ game.price }}</p>
-                    <button @click="verDetalhes(game.id)">Adicionar ao carrinho 🛒 </button>
+                    <button @click="adicionarAoCarrinho(game.id)">Adicionar ao carrinho 🛒 </button>
                 </div>
             </div>
         </div>
@@ -28,7 +28,10 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { getGamesByCategory } from "@/service/service";
+import { useCartStore } from "@/stores/counter";
+import router from "@/router";
 
+const cartStore = useCartStore();
 const route = useRoute();
 const games = ref([]);
 const loading = ref(true);
@@ -37,9 +40,6 @@ const categoriaNome = ref("");
 
 const categoryId = route.params.id;
 
-const verDetalhes = (gameId) => {
-    router.push({ name: "GameDetails", params: { id: gameId } });
-};
 
 const carregarJogos = async () => {
     try {
@@ -55,10 +55,19 @@ const carregarJogos = async () => {
     }
 };
 
-onMounted(() => {
+onMounted(async () => {
     carregarJogos();
+    try {
+        const response = await ('http://35.196.79.227:8000/games');
+        games.value = await response.json();
+    } catch (error) {
+    }
 });
 
+const adicionarAoCarrinho = (game) => {
+    cartStore.addToCart(game);
+    router.value('/CarrinhoView');
+};
 
 function getImg(imagePath) {
     const baseUrl = "http://35.196.79.227:8000";

@@ -42,8 +42,8 @@
                 <div v-for="produto in produtosComDesconto" :key="produto.id" class="produto-card">
                     <img :src="produto.image" :alt="produto.nome" class="produto-imagem">
                     <h3>{{ produto.nome }}</h3>
-                    <p class="preco-original">De: R$ {{ produto.preco_original.toFixed(2) }}</p>
-                    <p class="preco-desconto">Por: R$ {{ produto.preco_desconto.toFixed(2) }}</p>
+                    <p class="preco-original">De: R$ {{ produto(2) }}</p>
+                    <p class="preco-desconto">Por: R$ {{ produto(2) }}</p>
                     <button @click="adicionarAoCarrinho(produto)">Comprar</button>
                 </div>
             </div>
@@ -86,6 +86,7 @@ async function carregarProdutosComDesconto() {
 
 onMounted(() => {
     pegandoCategoria()
+    carregarProdutosComDesconto()
 })
 </script>
 

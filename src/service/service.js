@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzNDgyMTc5fQ.GmGcHf_-D-Of8Rr4OPT-LevlarFVfwETd-ycLw_171k";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzNTY3NzE4fQ.xHON9SpdRq5KGsaJm2_5uVlpJCrj7-lC0jLSvVzQrrk";
 export async function getCategorias() {
   try {
     const resultado = await api.get("/categories/user/9", {
@@ -67,7 +67,7 @@ export const getGamesByCategory = async (categoryId) => {
 
 export async function getProdutosComDesconto() {
   try {
-    const response = await api.get("/produtos/desconto"); 
+    const response = await api.get("/discounts"); 
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar produtos com desconto:", error);
