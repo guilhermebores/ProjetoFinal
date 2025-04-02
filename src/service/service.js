@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzNTY3NzE4fQ.xHON9SpdRq5KGsaJm2_5uVlpJCrj7-lC0jLSvVzQrrk";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5Iiwicm9sZSI6IkFETUlOIiwiZXhwIjoxNzQzNjU0NDYxfQ.tztf61SeaES47VcTFw_14Me40lqCUrjjt2QuWooIlLM";
 export async function getCategorias() {
   try {
     const resultado = await api.get("/categories/user/9", {
@@ -73,4 +73,17 @@ export async function getProdutosComDesconto() {
     console.error("Erro ao buscar produtos com desconto:", error);
     return [];
   }
+}
+
+export async function carrinho() {
+  try {
+    const response = await api.post("/carrinho", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {}
 }

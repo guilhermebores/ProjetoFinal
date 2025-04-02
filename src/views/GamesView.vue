@@ -1,29 +1,3 @@
-<template>
-    <div class="games-view">
-        <h1>Games {{ categoriaNome }}</h1>
-
-        <div class="games-gallery">
-            <div v-for="game in games" :key="game.id" class="game-card">
-                <img :src="getImg(game.image_path)" :alt="game.title" class="game-image" />
-                <div class="game-info">
-                    <h3>{{ game.name }}</h3>
-                    <p>{{ game.description }}</p>
-                    <p>{{ game.price }}</p>
-                    <button @click="adicionarAoCarrinho(game.id)">Adicionar ao carrinho 🛒 </button>
-                </div>
-            </div>
-        </div>
-
-        <div v-if="loading" class="loading">
-            Carregando jogos...
-        </div>
-
-        <div v-if="error" class="error">
-            Ocorreu um erro ao carregar os jogos. Tente novamente mais tarde.
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -58,7 +32,7 @@ const carregarJogos = async () => {
 onMounted(async () => {
     carregarJogos();
     try {
-        const response = await ('http://35.196.79.227:8000/games');
+        const response = ('http://35.196.79.227:8000/games');
         games.value = await response.json();
     } catch (error) {
     }
@@ -77,17 +51,52 @@ function getImg(imagePath) {
 
 </script>
 
+<template>
+    <div class="games-view">
+        <h1>Games {{ categoriaNome }}</h1>
+
+        <div class="games-gallery">
+            <div v-for="game in games" :key="game.id" class="game-card">
+                <img :src="getImg(game.image_path)" :alt="game.title" class="game-image" />
+                <div class="game-info">
+                    <h3>{{ game.name }}</h3>
+                    <p>{{ game.description }}</p>
+                    <p>{{ game.price }}</p>
+                    <button @click="adicionarAoCarrinho(game.id)">Adicionar ao carrinho 🛒 </button>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="loading" class="loading">
+            Carregando jogos...
+        </div>
+
+        <div v-if="error" class="error">
+            Ocorreu um erro ao carregar os jogos. Tente novamente mais tarde.
+        </div>
+    </div>
+</template>
+
+
 <style scoped>
 .games-view {
     padding: 20px;
     text-align: center;
 }
 
+img {
+    width: 300px !important;
+    height: 150px !important;
+}
+
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #333;
+
 }
+
+
 
 .games-gallery {
     display: grid;
@@ -152,5 +161,16 @@ button:hover {
     color: red;
     font-size: 1.2rem;
     margin-top: 20px;
+}
+
+@media (max-width: 570px) {
+    img {
+        width: 200px !important;
+        height: 100px !important;
+    }
+
+    h3 {
+        font-size: 1.3rem !important;
+    }
 }
 </style>
