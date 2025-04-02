@@ -1,85 +1,74 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { getGamesByCategory } from "@/service/service";
+import { getInformaticaByCategory } from "@/service/service";
 import { useCartStore } from "@/stores/counter";
 import router from "@/router";
 
 const cartStore = useCartStore();
 const route = useRoute();
-const games = ref([]);
+const informatica = ref([]);
 const loading = ref(true);
 const error = ref(false);
 const categoriaNome = ref("");
 
 const categoryId = route.params.id;
 
-
-const carregarJogos = async () => {
+const carregarEletronico = async () => {
     try {
-        const response = await getGamesByCategory(categoryId);
+        const response = await getInformaticaByCategory(categoryId);
         console.log("Dados Recebidos", response);
-        games.value = response;
+        informatica.value = response;
         categoriaNome.value = response.categoryName;
-        loading.value = false;
     } catch (err) {
-        console.er / ror("Erro ao carregar jogos", err);
+        console.error("Erro ao carregar eletrônicos", err);
         error.value = true;
+    } finally {
         loading.value = false;
     }
 };
 
 onMounted(async () => {
-    carregarJogos();
-    try {
-        const response = ('http://35.196.79.227:8000/games');
-        games.value = await response.json();
-    } catch (error) {
-    }
+    await carregarEletronico();
 });
 
-const adicionarAoCarrinho = (game) => {
-    cartStore.addToCart(game);
-    router.value('/CarrinhoView');
+const adicionarAoCarrinho = (produto) => {
+    cartStore.addToCart(produto);
+    router.push('/CarrinhoView');
 };
 
 function getImg(imagePath) {
     const baseUrl = "http://35.196.79.227:8000";
-    console.log(imagePath)
     return `${baseUrl}${imagePath}`;
 }
-
 </script>
 
 <template>
-    <div class="games-view">
-        <h1>Games {{ categoriaNome }}</h1>
+    <div class="informatica-view">
+        <h1>Informática - {{ categoriaNome }}</h1>
 
-        <div class="games-gallery">
-            <div v-for="game in games" :key="game.id" class="game-card">
-                <img :src="getImg(game.image_path)" :alt="game.title" class="game-image" />
-                <div class="game-info">
-                    <h3>{{ game.name }}</h3>
-                    <p>{{ game.description }}</p>
-                    <p>{{ game.price }}</p>
-                    <button @click="adicionarAoCarrinho(game.id)">Adicionar ao carrinho 🛒 </button>
-                </div>
-            </div>
-        </div>
-
-        <div v-if="loading" class="loading">
-            Carregando jogos...
-        </div>
+        <div v-if="loading" class="loading">Carregando produtos...</div>
 
         <div v-if="error" class="error">
-            Ocorreu um erro ao carregar os jogos. Tente novamente mais tarde.
+            Ocorreu um erro ao carregar os produtos. Tente novamente mais tarde.
+        </div>
+
+        <div v-if="!loading && !error" class="informatica-gallery">
+            <div v-for="produto in informatica" :key="produto.id" class="product-card">
+                <img :src="getImg(produto.image_path)" :alt="produto.title" class="product-image" />
+                <div class="product-info">
+                    <h3>{{ produto.name }}</h3>
+                    <p>{{ produto.description }}</p>
+                    <p>R$ {{ produto.price.toFixed(2) }}</p>
+                    <button @click="adicionarAoCarrinho(produto)">Adicionar ao carrinho 🛒</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-
 <style scoped>
-.games-view {
+.informatica-view {
     padding: 20px;
     text-align: center;
 }
@@ -88,19 +77,16 @@ h1 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #333;
-
 }
 
-
-
-.games-gallery {
+.informatica-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 0;
 }
 
-.game-card {
+.product-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
@@ -109,24 +95,24 @@ h1 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.game-card:hover {
+.product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.game-image {
+.product-image {
     width: 100%;
     height: auto;
     border-radius: 8px;
     margin-bottom: 15px;
 }
 
-.game-info h3 {
+.product-info h3 {
     font-size: 1.5rem;
     color: #333;
 }
 
-.game-info p {
+.product-info p {
     font-size: 1rem;
     color: #666;
     margin-bottom: 15px;
@@ -143,29 +129,15 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #b30000;
 }
 
-.loading {
+.loading, .error {
     font-size: 1.2rem;
-    color: #333;
     margin-top: 20px;
 }
 
 .error {
     color: red;
-    font-size: 1.2rem;
-    margin-top: 20px;
-}
-
-@media (max-width: 570px) {
-    img {
-        width: 200px !important;
-        height: 100px !important;
-    }
-
-    h3 {
-        font-size: 1.3rem !important;
-    }
 }
 </style>

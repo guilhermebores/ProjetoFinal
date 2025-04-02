@@ -58,16 +58,25 @@ export async function categories() {
 
 export const getGamesByCategory = async (categoryId) => {
   try {
-    const response = await api.get("/products/category/26");
+    const response = await api.get("/products/category/" + categoryId);
     return response.data;
   } catch (error) {
     throw error;
   }
-}
+};
+
+export const getInformaticaByCategory = async (categoryId) => {
+  try {
+    const response = await api.get("/products/category/" + categoryId);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export async function getProdutosComDesconto() {
   try {
-    const response = await api.get("/discounts"); 
+    const response = await api.get("/discounts");
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar produtos com desconto:", error);
